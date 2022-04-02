@@ -4,10 +4,10 @@ clc
 tic; %start the program timer
 
 %% Set File Names
-fireDatasheet = '../data-manipulation/northeast-samples.xlsx';
-sheetName = 'sheet9';
+fireDatasheet = '../data/trashData.xlsx';
+sheetName = 'sheet0';
 trialName = 'trial1';
-regionName = 'northeast';
+regionName = 'Region1';
 outputExcelName = strcat(trialName,'-', regionName, '-', 'data', '.xlsx');
 outputToursName = strcat(trialName, '-', regionName, '-', 'tours', '.png');
 outputBestToursName = strcat(trialName, '-', regionName, '-', 'best-tour', '.png');

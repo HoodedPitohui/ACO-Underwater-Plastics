@@ -1,0 +1,87 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
+
+```{r}
+library("readxl")
+library("writexl")
+library("xlsx")
+library("tidyverse")
+library("dplyr")
+library("rlang")
+ORIG_TABLE <- read_excel("ocean_data.xlsx")
+head(ORIG_TABLE)
+```
+
+
+```{r}
+cleaned_ocean_data <- ORIG_TABLE[c(-2, -3, -6:-9, -14 )]
+cleaned_ocean_data <- cleaned_ocean_data %>% subset(`Level 2p (pieces/km2)` != 0)
+head(cleaned_ocean_data)
+```
+Function for creation of random samples of dataframes based on region. This function also deletes existing version(s) of the excel file it intends to create. This way the program does not ever result in excel-files with over 10 sheets.
+
+```{r}
+generate_tables <- function(num_tables, num_rows, df, excel_name) {
+  if (file.exists(excel_name)) {
+    unlink(excel_name)
+  }
+  for (val in 1: num_tables) {
+    test_sample <- sample_n(df, num_rows)
+    name <- quo((val))
+    quo_name(name)
+    write.xlsx(test_sample, excel_name, sheetName = name, append = TRUE)
+  }
+}
+```
+```{r}
+
+Region1 <- cleaned_ocean_data %>% subset(`latitude (degree: N+, S-)` < 10 & `latitude (degree: N+, S-)` > 0 & `longitude (degree: E+, W-)` < -100)
+Region1$relativize_x_coord <- relativize_x_coordinate(Region1)
+Region1$relative_y_coord <- relativize_y_coordinate(Region1)
+Region1$elevation <- 0
+generate_tables(10, 20, Region1, 'trashData.xlsx')
+
+```
+```{r}
+generate_tables <- function(num_tables, num_rows, df, excel_name) {
+  if (file.exists(excel_name)) {
+    unlink(excel_name)
+  }
+  for (val in 1: num_tables) {
+    test_sample <- sample_n(df, num_rows)
+    name <- quo((val))
+    quo_name(name)
+    write.xlsx(test_sample, excel_name, sheetName = name, append = TRUE)
+  }
+}
+```
+Function for creation of random samples of dataframes based on region. This function also deletes existing version(s) of the excel file it intends to create. This way the program does not ever result in excel-files with over 10 sheets.
+
+
+Functions for relativization of regional latitude and longitude values
+Goal: find the lowest latitude value, then floor it and use it as a baseline for distances
+Lower value in latitude = further south
+Lower value in longitude = further west
+The idea is that this orients itself rather conveniently on a graphical plane as potential coordinates
+
+```{r}
+relativize_x_coordinate <- function(cleaned_ocean_data) {
+  lowest_long <- floor(min(cleaned_ocean_data$`longitude (degree: E+, W-)`))
+  x_relative_coords <- (cleaned_ocean_data$`longitude (degree: E+, W-)` - lowest_long) * 0.085 #(85000 = amount of meters between one degree of longitude)
+  return(x_relative_coords)
+}
+```
+
+```{r}
+relativize_y_coordinate <- function(cleaned_ocean_data) {
+  lowest_lat <- floor(min(cleaned_ocean_data$`latitude (degree: N+, S-)`))
+  y_relative_coords <- (cleaned_ocean_data$`latitude (degree: N+, S-)` - lowest_lat) * 2.1 #about 110 km in between degrees of latitude, and this is in meters
+  return(y_relative_coords)
+}
+```
