@@ -1,9 +1,9 @@
-function [graph] = createGraph(fireLocX, fireLocY, fireLocZ) %create an initial visualization
+function [graph] = createGraph(trashLocX, trashLocY, trashLocZ) %create an initial visualization
     %create the CONSTRUCTION GRAPH
-    graph.n = length(fireLocX);
-    x = fireLocX;
-    y = fireLocY;
-    z = fireLocZ;
+    graph.n = length(trashLocX);
+    x = trashLocX;
+    y = trashLocY;
+    z = trashLocZ;
     %plot the nodes
     for i = 1: graph.n
         graph.node(i).x = x(i);

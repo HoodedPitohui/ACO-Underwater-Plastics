@@ -9,8 +9,8 @@ function [ subTau ] = updatePheromone(subTau, subColony)
             currentNode = subColony.ant(i).tour(j);
             nextNode = subColony.ant(i).tour(j+1);
         
-            subTau(currentNode, nextNode) = subTau(currentNode, nextNode)  + 1./ subColony.ant(i).fireFitness;
-            subTau(nextNode, currentNode) = subTau(nextNode, currentNode)  + 1./ subColony.ant(i).fireFitness;
+            subTau(currentNode, nextNode) = subTau(currentNode, nextNode)  + 1./ subColony.ant(i).trashFitness;
+            subTau(nextNode, currentNode) = subTau(nextNode, currentNode)  + 1./ subColony.ant(i).trashFitness;
 
         end
     end
