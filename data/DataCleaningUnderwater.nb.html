@@ -272,13 +272,13 @@ head(cleaned_ocean_data)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5SZWdpb24xIDwtIGNsZWFuZWRfb2NlYW5fZGF0YSAlPiUgc3Vic2V0KGBsYXRpdHVkZSAoZGVncmVlOiBOKywgUy0pYCA8IDUwICYgYGxhdGl0dWRlIChkZWdyZWU6IE4rLCBTLSlgID4gMCAmIGBsb25naXR1ZGUgKGRlZ3JlZTogRSssIFctKWAgPCAtMTAwKVxuUmVnaW9uMSRyZWxhdGl2aXplX3hfY29vcmQgPC0gcmVsYXRpdml6ZV94X2Nvb3JkaW5hdGUoUmVnaW9uMSlcblJlZ2lvbjEkcmVsYXRpdmVfeV9jb29yZCA8LSByZWxhdGl2aXplX3lfY29vcmRpbmF0ZShSZWdpb24xKVxuUmVnaW9uMSRlbGV2YXRpb24gPC0gMFxuZ2VuZXJhdGVfdGFibGVzKDIwLCAxNSwgUmVnaW9uMSwgJ3RyYXNoRGF0YS54bHN4JylcblxuYGBgIn0= -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5SZWdpb24xIDwtIGNsZWFuZWRfb2NlYW5fZGF0YSAlPiUgc3Vic2V0KGBsYXRpdHVkZSAoZGVncmVlOiBOKywgUy0pYCA8IDEwICYgYGxhdGl0dWRlIChkZWdyZWU6IE4rLCBTLSlgID4gMCAmIGBsb25naXR1ZGUgKGRlZ3JlZTogRSssIFctKWAgPCAtMTAwKVxuUmVnaW9uMSRyZWxhdGl2aXplX3hfY29vcmQgPC0gcmVsYXRpdml6ZV94X2Nvb3JkaW5hdGUoUmVnaW9uMSlcblJlZ2lvbjEkcmVsYXRpdmVfeV9jb29yZCA8LSByZWxhdGl2aXplX3lfY29vcmRpbmF0ZShSZWdpb24xKVxuUmVnaW9uMSRlbGV2YXRpb24gPC0gMFxuZ2VuZXJhdGVfdGFibGVzKDEwLCAyMCwgUmVnaW9uMSwgJ3RyYXNoRGF0YS54bHN4JylcblxuYGBgIn0= -->
 <pre class="r"><code>
-Region1 &lt;- cleaned_ocean_data %&gt;% subset(`latitude (degree: N+, S-)` &lt; 50 &amp; `latitude (degree: N+, S-)` &gt; 0 &amp; `longitude (degree: E+, W-)` &lt; -100)
+Region1 &lt;- cleaned_ocean_data %&gt;% subset(`latitude (degree: N+, S-)` &lt; 10 &amp; `latitude (degree: N+, S-)` &gt; 0 &amp; `longitude (degree: E+, W-)` &lt; -100)
 Region1$relativize_x_coord &lt;- relativize_x_coordinate(Region1)
 Region1$relative_y_coord &lt;- relativize_y_coordinate(Region1)
 Region1$elevation &lt;- 0
-generate_tables(20, 15, Region1, &#39;trashData.xlsx&#39;)
+generate_tables(10, 20, Region1, &#39;trashData.xlsx&#39;)
 </code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->

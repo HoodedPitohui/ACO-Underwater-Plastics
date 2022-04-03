@@ -228,7 +228,9 @@ for d = 1: drones.actualNumberDronesUsed
     drawBestTour(drones.colony(d), drones, d, graph);
     drones.bestOverallFitness(1, d) = drones.colony(d).queen.fireFitness;
 end
-title('Best Overall Tour of All Iterations')
+title('Best Underwater Vehicle Routing Solution')
+xlabel('Distance (km)');
+ylabel('Distance (km)');
 
 %% Format data output and store as excel files
 
